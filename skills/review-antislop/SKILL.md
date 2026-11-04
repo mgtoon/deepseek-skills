@@ -1,56 +1,56 @@
 ---
 name: review-antislop
-description: Чек-лист приёмки и самопроверки модели перед выдачей результата. Обязателен в конце любой задачи по коду или интерфейсу.
+description: Acceptance checklist and model self-review before delivery. Required at the end of any code or interface task.
 ---
 
-# Приёмка без самообмана
+# Acceptance without self-deception
 
-## Как пользоваться
+## How to use
 
-Пройти пункты сверху вниз. На каждый — да/нет. Если «нет» — править, а не объяснять, почему так вышло. Модель, которая оправдывает штамп вместо того, чтобы его убрать, задачу не выполнила.
+Go through the items top to bottom. Each one is yes or no. If "no" — fix it, do not explain why it happened. A model that justifies a cliché instead of removing it has not done the task.
 
-## Интерфейс
+## Interface
 
-- [ ] На 320 px нет горизонтального скролла.
-- [ ] Каждый интерактивный элемент виден при переходе по Tab.
-- [ ] Контраст текста и фона проверен, а не оценён на глаз.
-- [ ] Все состояния есть: hover, focus, active, disabled, loading, error, empty.
-- [ ] Нет эмодзи в роли иконок; иконки — вектор одного набора.
-- [ ] Нет вымышленных отзывов, логотипов клиентов и метрик.
-- [ ] Нет `href="#"`, `Lorem ipsum`, `TODO` в готовых блоках.
-- [ ] Тени и градиенты: у каждого есть причина, которую можно назвать одной фразой.
+- [ ] No horizontal scroll at 320px.
+- [ ] Every interactive element is visible when tabbing.
+- [ ] Text and background contrast was measured, not estimated by eye.
+- [ ] All states exist: hover, focus, active, disabled, loading, error, empty.
+- [ ] No emoji as icons; icons are vectors from one set.
+- [ ] No invented testimonials, customer logos or metrics.
+- [ ] No `href="#"`, `Lorem ipsum`, `TODO` in finished blocks.
+- [ ] Shadows and gradients: each has a reason that fits in one sentence.
 
-## Код
+## Code
 
-- [ ] Проект собирается с нуля без ошибок и предупреждений, которые я сам внёс.
-- [ ] Основной сценарий и один ошибочный проверены запуском.
-- [ ] В диффе нет `TODO` без адреса, `console.log`, закомментированного кода.
-- [ ] Нет новых зависимостей без обоснования.
-- [ ] В диффе нет секретов, ключей, путей с моего компьютера.
-- [ ] Имена переменных читаются без контекста.
-- [ ] Обработка ошибок только там, где есть ввод-вывод.
-- [ ] Я не отключил линтер, тесты или проверку типов, чтобы «прошло».
+- [ ] The project builds from scratch without errors and without warnings I introduced.
+- [ ] The main path and one failing path were verified by running them.
+- [ ] The diff has no `TODO` without an owner, no `console.log`, no commented-out code.
+- [ ] No new dependencies without justification.
+- [ ] No secrets, keys or local machine paths in the diff.
+- [ ] Variable names read without context.
+- [ ] Error handling only where there is I/O.
+- [ ] I did not disable the linter, tests or type checking to "make it pass".
 
-## Текст
+## Copy
 
-- [ ] Нет стоп-формул из `skills/copy-antislop`.
-- [ ] Каждое обещание подтверждается кодом или удалено.
-- [ ] Ошибки объясняют, что делать дальше.
+- [ ] No stop formulas from `skills/copy-antislop`.
+- [ ] Every promise is backed by code or removed.
+- [ ] Errors explain what to do next.
 
-## Ответ
+## The answer
 
-- [ ] Я не хвалю свою работу и не извиняюсь за объём.
-- [ ] Я назвал, что осталось не сделано и почему.
-- [ ] Я не задавал вопросов, ответ на которые есть в задаче.
-- [ ] Допущения перечислены явно.
+- [ ] I do not praise my own work and do not apologise for the length.
+- [ ] I named what is not done and why.
+- [ ] I did not ask questions that the task already answers.
+- [ ] Assumptions are listed explicitly.
 
-## Формат отчёта
+## Report format
 
-Коротко, без разделов «Введение» и «Заключение»:
+Short, without "Introduction" and "Conclusion":
 
 ```
-Сделано: <1–3 пункта>
-Не сделано: <пункт + причина> (если есть)
-Проверено: <чем именно: сборка, запуск, скриншот>
-Риски: <что может сломаться> (если есть)
+Done: <1–3 items>
+Not done: <item + reason> (if any)
+Verified: <how exactly: build, run, screenshot>
+Risks: <what may break> (if any)
 ```
