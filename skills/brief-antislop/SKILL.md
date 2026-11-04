@@ -1,65 +1,66 @@
 ---
 name: brief-antislop
-description: Обязательный короткий бриф перед вёрсткой сайта или экрана. Четыре вопроса с вариантами и ответами по умолчанию — про направление (минимализм или дизайн-акцент), плотность, тему и контент. Не даёт модели уйти в шаблон и в квадратные заглушки.
+description: Mandatory short brief before any layout work. Four questions with defaults covering direction (minimalist or design-accent), density, theme and content. Stops the model from falling into a template or shipping square-bracket placeholders.
 ---
 
-# Бриф перед вёрсткой
+# Brief before markup
 
-## Правило
+## The rule
 
-Перед первой строкой HTML задай **один** блок вопросов. Не больше четырёх. У каждого вопроса — варианты и значение по умолчанию, чтобы можно было ответить «2, по умолчанию» и сразу получить работу.
+Before the first line of HTML, ask **one** block of questions. No more than four. Every question carries options and a default, so the user can answer "2, defaults" and get the work immediately.
 
-Если пользователь уже описал всё сам — не спрашивай, а повтори его выбор одной строкой и начинай.
+If the user already described everything — do not ask. Repeat their choice in one line and start.
 
-## Вопросы
+## Questions
 
-**1. Направление**
+**1. Direction**
 
-- **A. Минимализм.** Много воздуха, тонкие линии, один акцентный цвет, крупный заголовок и тихий текст. Без декора, без иконок в кружках, без анимации.
-- **B. Дизайн-акцент.** Крупная типографика, выразительная сетка, цветные плоскости, контраст масштабов. Без градиентов, стекла, неона и теней у текста.
-- **C. Утилитарный.** Плотная сетка, таблицы, моноширинные числа, ноль декора. Для админок, дашбордов, документации.
-- **D. Плакатный.** Большой контраст, асимметрия, крупные цифры, поля как в журнале. Для лендинга с одной мыслью.
+- **A. Minimalist.** Lots of air, thin rules, one accent colour, a large headline and a quiet body. No decoration, no icons in circles, no animation.
+- **B. Design-accent.** Large typography, an expressive grid, colour planes, contrast of scale. No gradients, glass, neon or text shadows.
+- **C. Utilitarian.** Dense grid, tables, tabular numerals, zero decoration. For admin panels, dashboards, documentation.
+- **D. Poster.** High contrast, asymmetry, big numbers, magazine margins. For a landing page with a single idea.
 
-По умолчанию: **A**.
+Default: **A**.
 
-**2. Плотность.** Компактно (база 14 px, отступы 8–12) / обычно (16 px, 16–24) / крупно (18 px, 24–40). По умолчанию: обычно.
+**2. Density.** Compact (14px base, 8–12 spacing) / normal (16px, 16–24) / large (18px, 24–40). Default: normal.
 
-**3. Тема.** Светлая / тёмная / обе. По умолчанию: светлая.
+**3. Theme.** Light / dark / both. Default: light.
 
-**4. Контент.** Дать реальные тексты и данные / разрешить написать их мне / только каркас без текста.
-Для лендинга добавь один вопрос: **что человек должен сделать** — скачать, купить, оставить заявку, прочитать.
+**4. Content.** Real copy and data from the user / permission to write it yourself / structure only, no text.
 
-## Что делать с ответами
+For a landing page add one question: **what should the visitor do** — download, buy, request, read.
 
-- Направление задаёт всё: ширину контейнера, размер заголовка, количество акцентов, наличие границ.
-- Минимализм: 1 акцент, 1 размер крупного заголовка, границы 1 px, тень только у всплывающего.
-- Дизайн-акцент: 2–3 цветные плоскости, крупные числа, но правило «один акцент» сохраняется; контраст проверяется.
-- Плакатный: заголовок 48–72 px, текст 16–18 px, отступы крупные, изображения реальные.
-- Утилитарный: 13–14 px, таблицы, `font-variant-numeric: tabular-nums`, никаких иллюстраций.
+## Applying the answers
 
-## Заглушки
+- Direction decides everything: container width, headline size, number of accents, presence of borders.
+- Minimalist: one accent, one large headline size, 1px borders, shadow only on overlays.
+- Design-accent: two or three colour planes, big numbers, but the one-accent rule still holds; check contrast.
+- Poster: headline 48–72px, body 16–18px, large spacing, real imagery.
+- Utilitarian: 13–14px, tables, `font-variant-numeric: tabular-nums`, no illustrations.
 
-Квадратных скобок в видимом интерфейсе быть не должно: `[название продукта]`, `[Короткий заголовок]`, `[скриншот]` — это не макет, а отказ от работы.
+## Placeholders
 
-Если факт неизвестен:
+Square brackets must not appear in the visible UI: `[product name]`, `[Short headline]`, `[screenshot]` is not a mockup, it is a refusal to do the work.
 
-1. Спроси — если без него нельзя.
-2. Напиши честный текст без выдуманной цифры: «Скачать», а не «Скачать · 12,4 МБ».
-3. Оставь `<!-- TODO: точное название -->` в коде, а в интерфейсе — рабочую формулировку-рыбу: «Инструмент для сборки релизов».
+If a fact is unknown:
 
-Выдуманные отзывы, логотипы клиентов и метрики запрещены. Отсутствие блока лучше вымышленного блока.
+1. Ask — if the page cannot exist without it.
+2. Write an honest sentence without an invented number: "Download", not "Download · 12.4 MB".
+3. Leave `<!-- TODO: exact product name -->` in the code, and in the UI write a working phrase: "A tool for assembling releases".
 
-## Что делает сайт красивым без слопа
+Invented testimonials, customer logos and metrics are forbidden. A missing block beats a fabricated block.
 
-- Иерархия: один главный заголовок, один акцент, три уровня текста.
-- Ритм: одинаковые отступы между однотипными блоками.
-- Воздух: пустое место — часть композиции, а не недоделка.
-- Типографика вместо эффектов: размер, вес, межстрочный.
-- Реальные данные и скриншоты вместо серых прямоугольников.
-- Одна деталь, за которую запомнят: крупная цифра, необычная сетка, точная подпись. Одна, не пять.
+## What makes a site good without slop
 
-## Приёмка
+- Hierarchy: one main headline, one accent, three levels of text.
+- Rhythm: identical spacing between identical blocks.
+- Air: empty space is part of the composition, not an unfinished corner.
+- Typography instead of effects: size, weight, line-height.
+- Real data and screenshots instead of grey rectangles.
+- One memorable detail: a large number, an unusual grid, a precise caption. One, not five.
 
-1. Можно назвать направление одной фразой? Если нет — смешались два стиля, выбрать один.
-2. В интерфейсе нет ни одной квадратной скобки.
-3. Каждый блок отвечает на вопрос пользователя, а не заполняет место.
+## Acceptance
+
+1. Can you name the direction in one phrase? If not, two styles got mixed — pick one.
+2. There is not a single square bracket in the UI.
+3. Every block answers a user question instead of filling space.
