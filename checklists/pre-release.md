@@ -1,48 +1,48 @@
-# Чек-лист перед сдачей
+# Pre-ship checklist
 
-Плоский список. Проходится за две минуты.
+A flat list. Takes two minutes.
 
-## Визуал
+## Visual
 
-1. Ни одного градиента без смысла.
-2. Ни одной тени у статичного блока.
-3. Радиусы одинаковые у одинаковых элементов.
-4. Не больше пяти размеров шрифта.
-5. Длина строки 60–75 символов.
-6. Один акцентный цвет.
-7. Иконки — вектор, один набор, один `stroke-width`.
-8. Ни одного эмодзи в интерфейсе.
+1. No gradient without meaning.
+2. No shadow on a static block.
+3. Identical radii on identical elements.
+4. No more than five font sizes.
+5. Line length 60–75 characters.
+6. One accent colour.
+7. Icons are vectors, one set, one `stroke-width`.
+8. No emoji anywhere in the interface.
 
-## Поведение
+## Behaviour
 
-9. Все семь состояний у кнопки и поля.
-10. Фокус виден с клавиатуры.
-11. Пустой список объясняет, что делать.
-12. Ошибка объясняет причину и следующий шаг.
-13. Загрузка не двигает вёрстку.
-14. Форма не отправляется дважды по двойному клику.
+9. All seven states on buttons and fields.
+10. Focus is visible from the keyboard.
+11. An empty list explains what to do.
+12. An error explains the cause and the next step.
+13. Loading does not shift the layout.
+14. The form cannot be submitted twice by a double click.
 
-## Адаптив
+## Responsive
 
-15. 320 px — без горизонтального скролла.
-16. 768 px — без разъехавшихся блоков.
-17. 1280 px — контент не растянут на всю ширину.
-18. Длинный текст (×2) не ломает карточку.
+15. 320px — no horizontal scroll.
+16. 768px — no broken blocks.
+17. 1280px — content is not stretched across the full width.
+18. Long text (×2) does not break the card.
 
-## Код
+## Code
 
-19. Сборка с нуля проходит.
-20. Запуск проходит.
-21. Ошибочный сценарий не роняет приложение.
-22. Нет `TODO` без адреса.
-23. Нет закомментированного кода.
-24. Нет отладочных выводов.
-25. Нет секретов в репозитории.
-26. Нет лишних зависимостей.
-27. Имена читаются без контекста.
+19. A clean build passes.
+20. It runs.
+21. A failing path does not crash the app.
+22. No `TODO` without an owner.
+23. No commented-out code.
+24. No debug output.
+25. No secrets in the repository.
+26. No unnecessary dependencies.
+27. Names read without context.
 
-## Текст
+## Copy
 
-28. Нет стоп-формул.
-29. Кнопки — глагол плюс объект.
-30. Описание репозитория — одна строка, до 100 символов.
+28. No stop formulas.
+29. Buttons are verb plus object.
+30. The repository description is one line, up to 100 characters.
