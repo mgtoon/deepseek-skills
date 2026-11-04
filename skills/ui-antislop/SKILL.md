@@ -1,96 +1,96 @@
 ---
 name: ui-antislop
-description: Правила вёрстки и визуала, которые не дают модели собрать типовой ИИ-лендинг. Применять к любой задаче, где есть HTML/CSS, компоненты, экраны, макеты, дашборды.
+description: Layout and visual rules that stop the model from assembling a generic AI landing page. Apply to anything with HTML/CSS, components, screens, mockups or dashboards.
 ---
 
-# UI без нейрослопа
+# UI without slop
 
-## Когда применять
+## When to apply
 
-Любая задача, где результат видно глазами: страница, компонент, письмо, десктопное окно, дашборд, мобильный экран.
+Any task whose result is seen: a page, a component, an email, a desktop window, a dashboard, a mobile screen.
 
-## Чёрный список
+## Banned patterns
 
-| Штамп | Почему плохо | Замена |
+| Pattern | Why it is bad | Replacement |
 |---|---|---|
-| Градиент `#6366f1 → #a855f7` | самый частый дефолт генераций, читается как «сделано за 10 секунд» | один акцентный цвет, градиент только если он несёт смысл (например, шкала) |
-| Стеклянные панели `backdrop-filter: blur(20px)` | съедает контраст текста, ломает читаемость на светлом фоне | плотный фон `#fff` / `#111` с границей 1 px |
-| Аврора-блобы, шум, звёзды на фоне hero | не связаны с продуктом | фон-цвет или реальный скриншот продукта |
-| Радиус 24–32 px у всего | сглаживает иерархию, блоки выглядят одинаково | радиус 4–8 px, у больших поверхностей — 12 px |
-| Тень у каждой карточки | уничтожает понятие слоя | тень только у того, что реально всплывает: попап, меню, модалка |
-| `box-shadow` у текста, `filter: drop-shadow` у заголовка | грязь на любом фоне | вес шрифта и размер |
-| Inter / Poppins по умолчанию с `letter-spacing: -0.03em` | визуальный клише-маркер | системный стек или шрифт проекта; трекинг не трогать без причины |
-| Эмодзи в роли иконок: 🚀 ✨ 🔥 ✅ | разный рендер, разный размер, детский вид | SVG `<path>`, единый `stroke-width` |
-| Три карточки Features с одинаковой иконкой в кружке | нечего сказать о продукте | список из 2–5 пунктов текстом или таблица сравнения |
-| «Trusted by 10 000+», «★★★★★», отзывы с вымышленными именами | фальшивая социальная доказанность | цифры, которые можно проверить, или ничего |
-| `Lorem ipsum`, `Your tagline here`, `href="#"` | выдаёт заготовку | реальный текст или явный `<!-- TODO: текст -->` рядом |
+| `#6366f1 → #a855f7` gradient | the most common generation default, reads as "made in ten seconds" | one accent colour; a gradient only when it carries meaning (a scale) |
+| Glass panels with `backdrop-filter: blur(20px)` | kills text contrast, breaks readability on light backgrounds | solid `#fff` / `#111` with a 1px border |
+| Aurora blobs, noise, stars behind the hero | unrelated to the product | background colour or a real product screenshot |
+| 24–32px radius on everything | flattens the hierarchy, all blocks look the same | 4–8px radius, 12px for large surfaces |
+| A shadow on every card | destroys the idea of layers | shadow only on what actually floats: popover, menu, modal |
+| `box-shadow` on text, `filter: drop-shadow` on a headline | dirt on any background | weight and size |
+| Inter / Poppins by default with `letter-spacing: -0.03em` | a visual cliché marker | the project font or a system stack; do not touch tracking without a reason |
+| Emoji as icons: 🚀 ✨ 🔥 ✅ | different rendering, different sizes, childish look | SVG `<path>`, one `stroke-width` |
+| Three feature cards with the same icon in a circle | nothing to say about the product | a list of 2–5 points as text, or a comparison table |
+| "Trusted by 10,000+", "★★★★★", testimonials with invented names | fake social proof | numbers that can be checked, or nothing |
+| `Lorem ipsum`, `Your tagline here`, `href="#"` | gives away a draft | real copy, or an explicit `<!-- TODO: copy -->` next to it |
 
-## Типографика
+## Typography
 
-- Шкала из 4–5 размеров, не больше. Пример: 12 / 14 / 16 / 20 / 32.
-- Межстрочный: 1.5 для текста, 1.15–1.25 для заголовков.
-- Длина строки: 60–75 символов (`max-width: 72ch`).
-- Вес вместо размера: важность передаётся 400/500/600, а не прыжком с 14 на 40.
-- Заголовок первого экрана — не больше 2 строк на десктопе. Если не влезает, текст длинный, а не колонка узкая.
-- Не капс и не `letter-spacing` больше 0.08em, кроме мелких меток.
+- A scale of 4–5 sizes, no more. Example: 12 / 14 / 16 / 20 / 32.
+- Line-height: 1.5 for body, 1.15–1.25 for headings.
+- Line length: 60–75 characters (`max-width: 72ch`).
+- Weight instead of size: importance comes from 400/500/600, not from jumping 14 to 40.
+- A first-screen headline fits in two lines on desktop. If it does not, the text is long, not the column narrow.
+- No all-caps, no `letter-spacing` above 0.08em except small labels.
 
-## Цвет
+## Colour
 
-- База: один нейтральный ряд (фон, поверхность, граница, текст, приглушённый текст). Акцент — один.
-- Контраст текста ≥ 4.5:1, крупного ≥ 3:1. Проверять, а не предполагать.
-- Не кодировать смысл только цветом: ошибка — цвет плюс текст плюс иконка.
-- Тёмная тема — не инверсия. Отдельные значения фона и границ, акцент светлее на 10–15 %.
+- Base: one neutral row (background, surface, border, text, muted text). One accent.
+- Text contrast ≥ 4.5:1, large text ≥ 3:1. Verify it, do not assume it.
+- Never encode meaning with colour alone: an error is colour plus text plus icon.
+- A dark theme is not an inversion. Separate background and border values, the accent goes 10–15% lighter.
 
-## Сетка и отступы
+## Grid and spacing
 
-- Шаг 4 px или 8 px. Все отступы кратны.
-- Вертикальный ритм: одинаковые расстояния между однотипными блоками.
-- Контейнер: `max-width` под контент, а не «на весь экран с полями 5 %».
-- Проверять три ширины: 320, 768, 1280. На 320 ничего не должно уезжать за экран.
+- Step of 4px or 8px. Every spacing value is a multiple.
+- Vertical rhythm: identical distances between identical blocks.
+- Container: `max-width` for the content, not "full width with 5% margins".
+- Check three widths: 320, 768, 1280. Nothing may overflow at 320.
 
-## Компоненты и состояния
+## Components and states
 
-Для каждого интерактивного элемента обязательны:
+Every interactive element needs:
 
-- `:hover` — изменение фона или границы, не масштаб.
-- `:focus-visible` — видимая обводка 2 px с отступом, не `outline: none`.
-- `:active` — сдвиг на 1 px или смена фона.
-- `disabled` — приглушение и `cursor: not-allowed`, без анимаций.
-- `loading` — спиннер или скелетон с фиксированными размерами, чтобы не прыгала вёрстка.
-- `error` — текст ошибки под полем, `aria-invalid`, не только красная рамка.
-- `empty` — что произошло и что делать дальше, одна кнопка.
+- `:hover` — background or border change, not scaling.
+- `:focus-visible` — a visible 2px outline with offset, never `outline: none`.
+- `:active` — 1px shift or background change.
+- `disabled` — dimmed, `cursor: not-allowed`, no animation.
+- `loading` — spinner or skeleton with fixed dimensions, so the layout does not jump.
+- `error` — the message under the field, `aria-invalid`, not just a red border.
+- `empty` — what happened and what to do next, one button.
 
-Формы: подпись над полем, `label` связан с `input`, ошибка после поля. Плейсхолдер — не подпись.
+Forms: label above the field, `label` bound to `input`, error after the field. A placeholder is not a label.
 
-## Графика и иконки
+## Graphics and icons
 
-- Иконки — вектор, один набор, `stroke-width` 1.5–2, размеры 16/20/24, `fill="none"`.
-- Иконка без подписи допустима только для общеизвестных действий (закрыть, поиск, назад).
-- Изображения: `alt` по смыслу, `width`/`height` заданы, соотношение сторон сохранено.
-- Иллюстрации — только если они объясняют. Декоративные люди в 3D-стиле — нет.
+- Icons are vectors from one set, `stroke-width` 1.5–2, sizes 16/20/24, `fill="none"`.
+- An icon without a label is allowed only for universally understood actions (close, search, back).
+- Images: meaningful `alt`, `width`/`height` set, aspect ratio preserved.
+- Illustrations only when they explain something. Decorative 3D people — no.
 
-## Анимация
+## Motion
 
-- Допустимо: появление попапа, раскрытие аккордеона, смена состояния — 120–200 мс, `ease-out`.
-- Недопустимо: fade-in при скролле на каждом блоке, параллакс, бесконечные пульсации.
-- Уважать `prefers-reduced-motion: reduce`.
+- Allowed: popover appearing, accordion expanding, state change — 120–200ms, `ease-out`.
+- Not allowed: fade-in on scroll for every block, parallax, endless pulses.
+- Respect `prefers-reduced-motion: reduce`.
 
-## Тексты-заглушки
+## Placeholder copy
 
-Квадратные скобки в видимом интерфейсе запрещены: `[название продукта]`, `[Короткий заголовок о том, что делает продукт]`, `[скриншот продукта]`. Страница из плейсхолдеров — это не макет, а отказ от работы.
+Square brackets in the visible UI are forbidden: `[product name]`, `[Short headline about what the product does]`, `[product screenshot]`. A page made of placeholders is not a mockup, it is a refusal to work.
 
-Порядок действий, если контента нет:
+What to do when there is no content:
 
-1. Спроси брифом (см. `skills/brief-antislop/SKILL.md`) — четыре вопроса с вариантами по умолчанию.
-2. Если спросить нельзя — напиши рабочий текст без выдуманных цифр: «Скачать», а не «Скачать · 12,4 МБ»; «Инструмент для сборки релизов», а не «[Короткий заголовок]».
-3. Пометку об неизвестном оставляй комментарием в коде: `<!-- TODO: точное название продукта -->`.
+1. Ask with the brief (see `skills/brief-antislop/SKILL.md`) — four questions with defaults.
+2. If asking is impossible, write working copy without invented numbers: "Download", not "Download · 12.4 MB"; "A tool for assembling releases", not "[Short headline]".
+3. Keep the note about the unknown as a code comment: `<!-- TODO: exact product name -->`.
 
-Вымышленные отзывы, логотипы клиентов и метрики — запрещены. Отсутствие блока лучше вымышленного блока. Серый прямоугольник вместо скриншота допустим, только если рядом написано, что именно сюда встанет и какого размера.
+Invented testimonials, customer logos and metrics are forbidden. A missing block beats a fabricated block. A grey rectangle instead of a screenshot is acceptable only when the caption says what goes there and at which size.
 
-## Приёмка
+## Acceptance
 
-1. Открыть на 320 px: есть горизонтальный скролл? Если да — переделывать.
-2. Tab по странице: видно, где фокус? Если нет — править `:focus-visible`.
-3. Уменьшить яркость экрана до 40 %: текст читается?
-4. Убрать все тени и градиенты: интерфейс всё ещё понятен? Если да — они были не нужны.
-5. Проверить контраст текста и фона калькулятором, а не на глаз.
+1. Open at 320px: is there a horizontal scroll? If yes — redo.
+2. Tab through the page: is the focus visible? If not — fix `:focus-visible`.
+3. Drop the screen brightness to 40%: is the text readable?
+4. Remove all shadows and gradients: is the interface still clear? If yes, they were unnecessary.
+5. Check text contrast with a calculator, not by eye.
