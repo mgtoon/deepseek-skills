@@ -1,84 +1,84 @@
 ---
 name: code-antislop
-description: Правила написания кода, которые не дают модели генерировать «архитектуру ради архитектуры», пустые заглушки и лишние зависимости. Применять к любой задаче с исходниками.
+description: Coding rules that stop the model from generating architecture for the sake of architecture, empty stubs and unnecessary dependencies. Apply to any task with source files.
 ---
 
-# Код без нейрослопа
+# Code without slop
 
-## Когда применять
+## When to apply
 
-Новая функция, правка существующего кода, рефакторинг, разбор ошибки, ревью.
+A new feature, a change in existing code, a refactor, a bug hunt, a review.
 
-## Главное правило
+## Main rule
 
-Код пишется под задачу, а не под учебник. Каждая абстракция должна окупаться уже сейчас, а не «на будущее»: если второй реализации не существует, интерфейс не нужен.
+Code is written for the task, not for a textbook. Every abstraction must pay off now, not "later": if a second implementation does not exist, the interface is not needed.
 
-## Структура
+## Structure
 
-- Не плодить слои. Для CRUD хватает: модель/структура данных, доступ к данным, обработчик. Всё.
-- Файл отвечает за одну вещь. Если в названии файла есть «and», это два файла.
-- Функция — до 40 строк и один экран. Больше — разбивать по смыслу, а не по номерам.
-- Вложенность до 3 уровней. Глубже — ранние `return`.
-- Общее состояние — минимум. Глобальная переменная допустима, если это конфиг или кэш на процесс, и она названа соответственно.
-- Стиль проекта важнее личных привычек: сначала читать соседний код, потом писать.
+- Do not multiply layers. For CRUD, three are enough: data model, data access, handler. That is all.
+- One file, one responsibility. If the filename contains "and", it is two files.
+- A function fits 40 lines and one screen. Longer — split by meaning, not by line numbers.
+- Nesting up to three levels. Deeper — use early `return`.
+- Minimise shared state. A global is acceptable when it is configuration or a process-level cache, and it is named accordingly.
+- The project style beats personal habits: read the neighbouring code first, then write.
 
-## Имена
+## Naming
 
-- Запрещены: `data`, `info`, `result`, `temp`, `obj`, `item2`, `handleData`, `process`.
-- Функция — глагол: `loadInvoices`, `retryRequest`, `parseHeader`.
-- Флаг — `is`/`has`/`can`: `isDirty`, `hasAccess`.
-- Единицы в имени, если число: `timeoutMs`, `sizeBytes`, `retryDelaySec`.
-- Одна и та же сущность называется одинаково во всём проекте. Не `user` в одном месте и `account` в другом.
+- Banned: `data`, `info`, `result`, `temp`, `obj`, `item2`, `handleData`, `process`.
+- Functions are verbs: `loadInvoices`, `retryRequest`, `parseHeader`.
+- Booleans are `is`/`has`/`can`: `isDirty`, `hasAccess`.
+- Units in the name when it is a number: `timeoutMs`, `sizeBytes`, `retryDelaySec`.
+- One entity keeps one name across the whole project. Not `user` here and `account` there.
 
-## Ошибки
+## Errors
 
-- `try/catch` только там, где есть ввод-вывод: сеть, файлы, парсинг, внешние процессы.
-- Ловить конкретное исключение, а не всё подряд.
-- Пустой обработчик запрещён. Либо восстановление, либо проброс с контекстом, либо явный лог и решение.
-- Текст ошибки содержит: что делали, с чем, что дальше. Не «Ошибка», не «Something went wrong».
-- Пользователю — человеческий текст, в лог — технические детали со стеком.
-- Не глотать ошибку ради «чтобы не падало». Падение с понятным сообщением лучше тихой поломки данных.
+- `try/catch` only where there is I/O: network, files, parsing, external processes.
+- Catch a specific exception, not everything.
+- An empty handler is forbidden. Either recovery, or a rethrow with context, or an explicit log and a decision.
+- The error text says what was being done, with what, and what happens next. Not "Error", not "Something went wrong".
+- The user gets a human sentence, the log gets technical detail with a stack trace.
+- Do not swallow errors "so it does not crash". A crash with a clear message beats silent data corruption.
 
-## Зависимости
+## Dependencies
 
-- Прежде чем добавлять пакет, проверить, решает ли это стандартная библиотека языка.
-- Одна функция — не повод для пакета. Пакет — это обновления, уязвимости и вес.
-- Не тянуть фреймворк ради трёх экранов.
-- Версии фиксировать, версии проверять на актуальность.
-- Никаких зависимостей из непроверенных источников и никаких «универсальных хелперов» с obfuscated-кодом.
+- Before adding a package, check whether the standard library solves it.
+- One function is not a reason for a package. A package means updates, vulnerabilities and weight.
+- Do not drag in a framework for three screens.
+- Pin versions, check that versions are current.
+- No dependencies from unverified sources, no "universal helpers" with obfuscated code.
 
-## Заглушки
+## Stubs
 
-- `TODO` допустим только с адресом: `// TODO(auth): заменить на refresh-токен`.
-- Нельзя сдавать функцию, которая возвращает фиктивные данные, без пометки в названии: `mockInvoiceList` вместо `getInvoices`.
-- «Готово» означает: собирается, запускается, обрабатывает пустой ввод, обрабатывает ошибку ввода-вывода.
-- Не отключать проверки типов и линтеры, чтобы «собралось».
+- `TODO` is allowed only with an owner: `// TODO(auth): replace with a refresh token`.
+- Never ship a function returning fake data without saying so in the name: `mockInvoiceList` instead of `getInvoices`.
+- "Done" means: it builds, it runs, it handles empty input, it handles I/O failure.
+- Do not disable type checks or linters to "make it build".
 
-## Комментарии
+## Comments
 
-- Комментарий объясняет **почему**, а не **что**. `// ждём 200 мс: API отдаёт старый кэш после записи`.
-- Не комментировать очевидное.
-- Не оставлять закомментированный код. Удалять: история есть в git.
-- Публичные функции — короткий контракт: что принимает, что возвращает, что бросает.
+- A comment explains **why**, not **what**. `// wait 200ms: the API serves a stale cache right after a write`.
+- Do not comment the obvious.
+- Do not leave commented-out code. Delete it: history lives in git.
+- Public functions get a short contract: what it takes, what it returns, what it throws.
 
-## Тесты
+## Tests
 
-- Тест проверяет поведение, а не реализацию: вход → результат.
-- Один тест — одна причина падения.
-- Не писать тесты на геттеры и на тривиальные конструкторы.
-- Обязательный минимум: границы (0, пусто, максимум), ошибка ввода-вывода, основной сценарий.
+- A test checks behaviour, not implementation: input → output.
+- One test, one reason to fail.
+- Do not test getters or trivial constructors.
+- Mandatory minimum: boundaries (0, empty, maximum), I/O failure, the main path.
 
-## Безопасность
+## Security
 
-- Никаких секретов в коде и в репозитории. Только переменные окружения и файлы, которых нет в git.
-- SQL — только параметризованный.
-- Пользовательский ввод валидируется на входе, а не «где-то потом».
-- Пути из ввода нормализуются, `..` отсекается.
+- No secrets in code or in the repository. Environment variables and gitignored files only.
+- SQL is parameterised, always.
+- User input is validated on entry, not "somewhere later".
+- Paths from input are normalised, `..` is rejected.
 
-## Приёмка
+## Acceptance
 
-1. Собрать проект с нуля: `dotnet build` / `npm run build` / `python -m compileall`. Ошибок нет.
-2. Запустить основной сценарий и один ошибочный.
-3. Поиском по диффу найти `TODO`, `console.log`, `print(`, закомментированный код.
-4. Проверить, что ни одна новая зависимость не добавлена без причины.
-5. Прочитать дифф вслух: если строка требует объяснения — переписать.
+1. Build the project from scratch: `dotnet build` / `npm run build` / `python -m compileall`. No errors.
+2. Run the main path and one failing path.
+3. Search the diff for `TODO`, `console.log`, `print(`, commented-out code.
+4. Check that no new dependency was added without a reason.
+5. Read the diff aloud: if a line needs explaining, rewrite it.
