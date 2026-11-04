@@ -1,63 +1,63 @@
 ---
 name: deep-audit
-description: Режим глубокой проверки для DeepSeek: десять отдельных проходов по коду, поведению и дизайну перед выдачей результата. Применять всегда, когда включён режим размышления или задача крупнее одного файла.
+description: Deep review mode for DeepSeek: ten separate passes over code, behaviour and design before delivering. Use whenever thinking mode is on or the task is bigger than one file.
 ---
 
-# Десять проходов проверки
+# Ten review passes
 
-## Правило
+## The rule
 
-Десять проходов — это десять разных проверок, а не один общий взгляд. Каждый заканчивается **правкой**, если что-то найдено. Отчёт «прохода не было» запрещён: если проверка неприменима, пиши «проход 6: не применимо, интерфейса нет».
+Ten passes mean ten different checks, not one general look. Each ends with a **fix** if something was found. "The pass did not happen" is not a report: if a check does not apply, write "pass 6: not applicable, there is no interface".
 
-Порядок жёсткий: 1 → 10. Нельзя начинать с дизайна, не убедившись, что код собирается.
+The order is fixed: 1 → 10. Never start with design before the code builds.
 
-## Проходы
+## Passes
 
-**1. Сборка.** Проект компилируется с нуля тем способом, который принят в проекте. Нет ошибок. Предупреждения, которые внёс я, — исправлены. Не отключать линтер, типы и тесты, чтобы «собралось».
+**1. Build.** The project compiles from scratch the way the project does it. No errors. Warnings I introduced are fixed. Do not disable linters, types or tests to "make it build".
 
-**2. Запуск.** Основной сценарий проходит целиком. Я не могу считать задачу сделанной, если код ни разу не запускался.
+**2. Run.** The main path goes through end to end. A task is not done if the code was never executed.
 
-**3. Границы.** Пустой ввод, ноль, отрицательное число, максимальная длина, отсутствующий файл, пустой список, повторная отправка. На каждый случай — понятное поведение, а не стектрейс.
+**3. Boundaries.** Empty input, zero, negative number, maximum length, missing file, empty list, double submit. Each case has defined behaviour, not a stack trace.
 
-**4. Ошибки ввода-вывода.** Сеть, файлы, парсинг, внешние команды. Проверить: таймаут, отказ, частичный ответ, повтор. Нет пустых `catch`, нет проглоченных исключений.
+**4. I/O errors.** Network, files, parsing, external commands. Check: timeout, refusal, partial response, retry. No empty `catch`, no swallowed exceptions.
 
-**5. Безопасность.** Секреты не в коде. SQL параметризован. Пользовательский ввод валидируется на входе. Пути нормализованы. Нет `eval`, `innerHTML` с пользовательскими данными, отключённой проверки сертификатов и `--insecure` по умолчанию.
+**5. Security.** No secrets in code. SQL is parameterised. User input is validated on entry. Paths are normalised. No `eval`, no `innerHTML` with user data, no disabled certificate checks and no `--insecure` by default.
 
-**6. Доступность.** Tab по всей странице: фокус виден. Есть `label` у полей, `alt` у картинок, `aria-invalid` и текст у ошибки. Контраст текста ≥ 4.5:1 — проверен калькулятором. Кнопка-иконка имеет подпись.
+**6. Accessibility.** Tab through the page: focus is visible. Fields have `label`, images have `alt`, errors have `aria-invalid` plus text. Text contrast ≥ 4.5:1 — verified with a calculator. Icon buttons have a label.
 
-**7. Адаптив.** 320, 768, 1280 px. Нет горизонтального скролла, ничего не наезжает. Текст, растянутый вдвое, не ломает карточку.
+**7. Responsive.** 320, 768, 1280px. No horizontal scroll, nothing overlaps. Text stretched to twice the length does not break the card.
 
-**8. Наш дизайн.** Перечитать `skills/ui-antislop/SKILL.md` и `skills/brief-antislop/SKILL.md` перед этим проходом и сверить построчно:
-- направление одно и названо (минимализм / дизайн-акцент / утилитарный / плакатный);
-- один акцентный цвет, не больше пяти размеров шрифта;
-- радиусы 4–8 px, у больших поверхностей до 12;
-- тени только у всплывающего: попап, меню, модалка;
-- иконки — вектор, один `stroke-width`, без эмодзи;
-- все состояния: hover, focus-visible, active, disabled, loading, error, empty;
-- нет градиентов без смысла, стекла, аврора-блобов, «Trusted by 10 000+»;
-- нет квадратных скобок и `Lorem ipsum` в видимом тексте.
+**8. Our design.** Re-read `skills/ui-antislop/SKILL.md` and `skills/brief-antislop/SKILL.md` before this pass and check line by line:
+- one direction, named (minimalist / design-accent / utilitarian / poster);
+- one accent colour, no more than five font sizes;
+- radii 4–8px, up to 12 for large surfaces;
+- shadows only on overlays: popover, menu, modal;
+- icons are vectors with one `stroke-width`, no emoji;
+- every state: hover, focus-visible, active, disabled, loading, error, empty;
+- no gradients without meaning, no glass, no aurora blobs, no "Trusted by 10,000+";
+- no square brackets and no `Lorem ipsum` in visible text.
 
-**9. Вес и скорость.** Новые зависимости обоснованы. Нет лишних запросов в цикле, нет картинок в исходном размере на превью, нет блокирующих скриптов без нужды.
+**9. Weight and speed.** New dependencies are justified. No queries in a loop, no full-size images in a thumbnail, no blocking scripts without need.
 
-**10. Дифф целиком.** Прочитать изменения как чужой код: имена читаются, мёртвого кода нет, отладочных выводов нет, `TODO` только с адресом, комментарии объясняют «почему».
+**10. The whole diff.** Read the changes as someone else's code: names read well, no dead code, no debug output, `TODO` only with an owner, comments explain "why".
 
-## Отчёт
+## Report
 
-В конце ответа — семь строк, не больше:
+End the answer with seven lines at most:
 
 ```
-Проход 1: сборка — ок
-Проход 3: границы — добавлена проверка пустого ввода
-Проход 6: доступность — добавлен focus-visible
-Проход 8: дизайн — убрана тень у карточек, оставлена у меню
-Проход 10: дифф — удалён console.log
-Не проверено: проход 9, зависимостей не добавлял
-Риски: нет
+Pass 1: build — ok
+Pass 3: boundaries — added empty-input check
+Pass 6: accessibility — added focus-visible
+Pass 8: design — removed card shadow, kept it on the menu
+Pass 10: diff — removed console.log
+Not checked: pass 9, no dependencies added
+Risks: none
 ```
 
-## Запрещено
+## Forbidden
 
-- Писать «всё проверено», если запуска не было.
-- Оправдывать найденный штамп вместо правки.
-- Пропускать проход 8 «потому что задача про бэкенд» — если интерфейса нет, так и написать.
-- Считать ревью выполненным по памяти: дизайн-правила перечитываются на проходе 8.
+- Writing "everything is checked" when nothing was run.
+- Justifying a cliché instead of fixing it.
+- Skipping pass 8 "because the task is backend" — if there is no interface, say so.
+- Running the review from memory: the design rules are re-read during pass 8.
