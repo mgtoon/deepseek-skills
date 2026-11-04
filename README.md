@@ -1,33 +1,35 @@
 # deepseek-skills
 
-Промпт-скилы для DeepSeek, которые отключают «нейрослоп»: шаблонные лендинги и код-пустышки.
+Prompt skills for DeepSeek that switch off "AI slop": template landing pages and placeholder-riddled code.
 
-## Что считается слопом
+## What counts as slop
 
-**Сайт.** Фиолетово-синий градиент, стеклянные карточки с blur, эмодзи вместо иконок, «Trusted by 10 000+», три одинаковые плашки Features, всё скруглено на 24 px, шрифт Inter по умолчанию, анимация появления на каждом блоке.
+**Sites.** Purple-to-blue gradient, glass cards with blur, emoji instead of icons, "Trusted by 10,000+", three identical feature cards, everything rounded to 24px, Inter by default, a fade-in on every block.
 
-**Код.** `BaseManagerFactoryProvider` для одной таблицы, пустые `try/catch`, зависимость ради одной функции, «готово» с тремя TODO в теле, имена `data`, `result`, `temp`.
+**Code.** `BaseManagerFactoryProvider` for one table, empty `try/catch`, a dependency for one function, "done" with three TODOs in the body, names like `data`, `result`, `temp`.
 
-**Текст.** «В современном мире…», «Это не просто инструмент, это философия», «бесшовный», «мощный и гибкий», «раскрой потенциал».
+**Copy.** "In today's fast-paced world…", "It is not just a tool, it is a philosophy", "seamless", "powerful yet flexible", "unlock your potential".
 
-## Состав
+## Contents
 
-| Путь | Назначение |
+| Path | Purpose |
 |---|---|
-| `DEEPSEEK.md` | компактный системный промпт, вставляется первым сообщением |
-| `skills/ui-antislop/SKILL.md` | вёрстка и визуал: типографика, палитра, сетка, состояния |
-| `skills/code-antislop/SKILL.md` | архитектура, имена, ошибки, зависимости, тесты |
-| `skills/copy-antislop/SKILL.md` | тексты интерфейса, ошибки, пустые состояния, README |
-| `skills/review-antislop/SKILL.md` | приёмка результата и самопроверка модели |
-| `checklists/pre-release.md` | плоский чек-лист перед сдачей |
+| `DEEPSEEK.md` | compact system prompt, paste as the first message |
+| `skills/brief-antislop/SKILL.md` | four questions before any markup: direction, density, theme, content |
+| `skills/ui-antislop/SKILL.md` | typography, palette, grid, states, banned patterns |
+| `skills/code-antislop/SKILL.md` | structure, naming, errors, dependencies, placeholders |
+| `skills/copy-antislop/SKILL.md` | UI copy, errors, empty states, README |
+| `skills/deep-audit/SKILL.md` | ten review passes before delivery |
+| `skills/review-antislop/SKILL.md` | acceptance checks and self-review |
+| `checklists/pre-release.md` | flat pre-ship checklist |
 
-## Как подключить
+## How to use it
 
-### Веб-чат deepseek.com
+### DeepSeek chat
 
-1. Открой `DEEPSEEK.md` и скопируй целиком.
-2. Вставь первым сообщением, следом опиши задачу.
-3. Если задача про интерфейс — добавь нужный `SKILL.md` вторым сообщением: «Дальше работай по этому скилу».
+1. Open `DEEPSEEK.md` and copy it in full.
+2. Paste it as the first message, then describe the task.
+3. If the task is about UI, send the relevant `SKILL.md` as the second message: "Work by this skill from now on".
 
 ### API
 
@@ -39,12 +41,12 @@ system = (
 )
 ```
 
-Скилы — обычный markdown с frontmatter `name`/`description`, поэтому их можно класть в любую обвязку, которая читает правила из файлов: `.deepseek/`, `.cursor/rules/`, `AGENTS.md`.
+Skills are plain markdown with `name`/`description` frontmatter, so they fit any setup that reads rules from files: `.deepseek/`, `.cursor/rules/`, `AGENTS.md`.
 
-## Принцип
+## Principle
 
-Скилы не запрещают красиво. Они запрещают **дефолт**: решение, которое принимается потому, что так делает каждая вторая генерация, а не потому, что оно подходит задаче. Любое отклонение от правил допустимо, если модель называет причину одной фразой и причина относится к проекту, а не к шаблону.
+The skills do not forbid good design. They forbid **the default**: a decision made because every second generation makes it, not because it fits the task. Any deviation is allowed if the model can state the reason in one sentence and that reason belongs to the project, not to a template.
 
-## Лицензия
+## License
 
 MIT.
